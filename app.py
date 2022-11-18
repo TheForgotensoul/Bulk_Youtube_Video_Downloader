@@ -23,7 +23,7 @@ for i in range(len(res)):
         # displaying the contents of the CSV file
         for lines in csvFile:
             links.append(lines["Video Link"])
-            titles.append(lines["Topic Name"])
+            titles.append(lines["Title"])
     file.close()
 
 # funstion to download videos from youtube
@@ -31,7 +31,9 @@ for i in range(len(res)):
 
 def Download(link, title):
     # create a temp folder
-    Path('/temp/').mkdir(parents=True, exist_ok=True)
+    Path('Videos/').mkdir(parents=True, exist_ok=True)
+    # create a temp folder
+    Path('temp/').mkdir(parents=True, exist_ok=True)
 
     # check if the string exist in the link
     if "https://www.youtube.com/watch?v=" in link:
