@@ -26,9 +26,8 @@ for i in range(len(res)):
             titles.append(lines["Title"])
     file.close()
 
+
 # funstion to download videos from youtube
-
-
 def Download(link, title):
     # create a temp folder
     Path('Videos/').mkdir(parents=True, exist_ok=True)
