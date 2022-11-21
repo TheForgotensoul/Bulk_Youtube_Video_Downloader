@@ -29,6 +29,10 @@ For Linux: git clone https://github.com/TheForgotensoul/Bulk_Youtube_Video_Downl
 
 cd to the folder in cmd(terminal) and run:
 pip install -r requirements.txt
+
+# Then go into your download folder and extract the ffmped.zip in to the same folder. the folder should look something ike the below image.
+
+
 ```
 
 ## Usage
