@@ -53,7 +53,7 @@ cd Bulk_Youtube_Video_Downloader  (Ex: cd /home/toto/Desktop/Bulk_Youtube_Video_
 # Then run:
 python app.py
 ```
-The video will be populated in ***Videos*** Folder in the same location.
+The videos will be populated in ***Videos*** Folder in the same location.
 
 ## Author
 
