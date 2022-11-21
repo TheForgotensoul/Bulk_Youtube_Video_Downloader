@@ -13,23 +13,22 @@ titles = []
 # folder path to find csv files
 res = [x for x in Path("CSV Files/").glob('*.csv')]
 
-
-for i in range(len(res)):
+for i in res:
     # opening the CSV file
-    with open(res[i], mode='r')as file:
+    with open(i, mode='r')as file:
         # reading the CSV file
         csvFile = csv.DictReader(file)
 
         # displaying the contents of the CSV file
         for lines in csvFile:
+            titles.append(f'{i.name.split(".")[0]} {lines["Title"]}')
             links.append(lines["Video Link"])
-            titles.append(lines["Title"])
-    file.close()
 
+    file.close()
 
 # funstion to download videos from youtube
 def Download(link, title):
-    # create a temp folder
+    # create a videos folder
     Path('Videos/').mkdir(parents=True, exist_ok=True)
     # create a temp folder
     Path('temp/').mkdir(parents=True, exist_ok=True)
@@ -76,6 +75,6 @@ def Download(link, title):
     else:
         print("Invalid URL")
 
+for j in range(len(links)):
+    Download(links[j], titles[j])
 
-for i in range(len(links)-1):
-    Download(links[i], titles[i])
