@@ -21,19 +21,24 @@
 
 ### ✨ [Demo](https://github.com/TheForgotensoul/Bulk_Youtube_Video_Downloader)
 
+
 ## Install
 
-```sh
+
 For Windows: Download from the repository
+```sh
 For Linux: git clone https://github.com/TheForgotensoul/Bulk_Youtube_Video_Downloader.git
 
 cd to the folder in cmd(terminal) and run:
 pip install -r requirements.txt
-
-# Then go into your download folder and extract the ffmped.zip in to the same folder. the folder should look something ike the below image.
-
-
 ```
+
+> Then go into your download folder(/home/toto/Desktop/Bulk_Youtube_Video_Downloader) and extract the ffmped.zip in to the same folder. 
+> The folder should look something Like the below image.
+
+![Folder_lookalike](https://raw.githubusercontent.com/TheForgotensoul/Bulk_Youtube_Video_Downloader/main/ref_img/folder_lookalike.png)
+
+
 
 ## Usage
 
