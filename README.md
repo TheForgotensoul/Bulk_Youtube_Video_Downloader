@@ -43,7 +43,8 @@ pip install -r requirements.txt
 ## Usage
 Place the CSV file in the the CSV Files folder.
 The CSV File should look like the below Image.
-**Do not change the header names**
+
+**Do not change the header names.**
 
 ![CSV_Files](https://raw.githubusercontent.com/TheForgotensoul/Bulk_Youtube_Video_Downloader/main/ref_img/CSV_file.png)
 ```sh
