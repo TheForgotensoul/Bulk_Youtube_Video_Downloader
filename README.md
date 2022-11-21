@@ -24,19 +24,20 @@
 ## Install
 
 ```sh
+For Windows: Download from the repository
+For Linux: git clone https://github.com/TheForgotensoul/Bulk_Youtube_Video_Downloader.git
+
+cd to the folder in cmd(terminal) and run:
 pip install -r requirements.txt
 ```
 
 ## Usage
 
 ```sh
-npm run start
-```
+cd Bulk_Youtube_Video_Downloader  (Ex: cd /home/toto/Desktop/Bulk_Youtube_Video_Downloader )
 
-## Run tests
-
-```sh
-npm run test
+# Then run:
+python app.py
 ```
 
 ## Author
