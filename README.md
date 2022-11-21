@@ -34,14 +34,18 @@ pip install -r requirements.txt
 ```
 
 > Then go into your download folder(/home/toto/Desktop/Bulk_Youtube_Video_Downloader) and extract the ffmped.zip in to the same folder. 
-> The folder should look something Like the below image.
+> The folder should look something like the below image.
 
 ![Folder_lookalike](https://raw.githubusercontent.com/TheForgotensoul/Bulk_Youtube_Video_Downloader/main/ref_img/folder_lookalike.png)
 
 
 
 ## Usage
+Place the CSV file in the the CSV Files folder.
+The CSV File should look like the below Image.
+**Do not change the header names**
 
+![CSV_Files](https://raw.githubusercontent.com/TheForgotensoul/Bulk_Youtube_Video_Downloader/main/ref_img/CSV_file.png)
 ```sh
 cd Bulk_Youtube_Video_Downloader  (Ex: cd /home/toto/Desktop/Bulk_Youtube_Video_Downloader )
 
