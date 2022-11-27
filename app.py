@@ -1,7 +1,6 @@
 import PySimpleGUI as sg
 import os
 
-action = ""
 file_list_column = [
     [
         sg.Text("CSV Folder"),
