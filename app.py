@@ -95,7 +95,7 @@ def main():
         ]
     ]
 
-    window = sg.Window("Youtube Video Downloader", layout, size=(600, 600), icon='logo.ico')
+    window = sg.Window("Youtube Video Downloader", layout, size=(600, 600), icon='icon.ico')
 
     while True:
         event, values = window.read()
