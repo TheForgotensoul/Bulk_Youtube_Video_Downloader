@@ -51,7 +51,7 @@ The CSV File should look like the below Image.
 cd Bulk_Youtube_Video_Downloader  (Ex: cd /home/toto/Desktop/Bulk_Youtube_Video_Downloader )
 
 # Then run:
-python app.py
+python CLI.py
 ```
 The videos will be populated in ***Videos*** Folder in the same location.
 
