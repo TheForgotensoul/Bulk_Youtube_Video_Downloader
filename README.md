@@ -15,7 +15,7 @@
   </a>
 </p>
 
-> Bulk Youtube Video Downloader is a python program used to download high quality yotube video in bulk by providing the youtube video link and custom tiles in a csv file. 
+> Bulk Youtube Video Downloader is a python program used to download high quality youtube video in bulk by providing the youtube video link and custom tiles in a csv file. 
 
 ### 🏠 [Homepage](https://github.com/TheForgotensoul/Bulk_Youtube_Video_Downloader)
 
@@ -23,9 +23,20 @@
 
 
 ## Install
+<br>
 
+### Windows Application
+---
+* **Step_1:** Go to releases and **Download** the latest version.
+* **Step_2:** Now **Extract** the downloaded Folder.
+* **Step_3:** Double click or Run the application named **app**.
+* **Step_4:** Browse and select the CSV File(Files) and click on download and watch the magic happening.
+* **Step_5:** Yiu can the downloaded videos in the **Videos** folder located inside the **BYVD** Folder.
+<br><br>
 
-For Windows: Download from the repository
+### CLI INSTALL
+---
+For Windows: Download from the repository:
 ```sh
 For Linux: git clone https://github.com/TheForgotensoul/Bulk_Youtube_Video_Downloader.git
 
