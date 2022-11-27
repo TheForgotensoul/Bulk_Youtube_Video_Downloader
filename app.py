@@ -95,7 +95,7 @@ def main():
         ]
     ]
 
-    window = sg.Window("Youtube Video Downloader", layout, size=(600, 600))
+    window = sg.Window("Youtube Video Downloader", layout, size=(600, 600), icon='logo.ico')
 
     while True:
         event, values = window.read()
@@ -144,7 +144,7 @@ def main():
                         window["-download-"].update(
                             f"Downloading Started for Video with title {titles[j].strip()}")
                     Download(links[j], titles[j])
-                    
+
             except Exception as e:
                 print(e)
                 print("An error has occurred")
