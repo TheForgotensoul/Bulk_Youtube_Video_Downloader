@@ -130,4 +130,5 @@ dmypy.json
 
 #custome
 Videos/
+temp/
 *.exe
