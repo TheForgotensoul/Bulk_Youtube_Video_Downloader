@@ -4,6 +4,7 @@ import shlex
 import shutil
 import subprocess
 import sys
+import time
 from pathlib import Path
 
 import PySimpleGUI as sg
@@ -24,10 +25,9 @@ def main():
 
         # check if the string exist in the link
         if "https://www.youtube.com/watch?v=" in link:
-
             print(
                 f"Downloading Started for Video with title {title.strip()} \n")
-            window["-action-"].update(f"Downloading Started for Video with title {title.strip()}")
+
             # Ceate Youtube Object
             youtubeObject = YouTube(link)
 
@@ -63,24 +63,29 @@ def main():
         else:
             print("Invalid URL")
 
+    sg.theme('DarkAmber')
 
     file_list_column = [
+
         [
             sg.Text("CSV Folder"),
             sg.In(size=(25, 1), enable_events=True, key="-FOLDER-"),
             sg.FolderBrowse(),
         ],
         [
-            sg.Text(action, key="-action-"),
+            sg.Text(action, key="-action-")
         ],
         [
             sg.Listbox(
-                values=[], enable_events=True, size=(50, 20), key="-FILE LIST-"
+                values=[], enable_events=True, size=(100, 25), key="-FILE LIST-"
             )
         ],
         [
-            sg.Button('Exit', button_color=('white', 'firebrick3')),
-            sg.Button('Download', button_color=('white', 'green'))
+            sg.Text(" ", key="-download-")
+        ],
+        [
+            sg.Button('Exit'),
+            sg.Button('Download')
         ],
     ]
 
@@ -90,7 +95,7 @@ def main():
         ]
     ]
 
-    window = sg.Window("Youtube Video Downloader", layout)
+    window = sg.Window("Youtube Video Downloader", layout, size=(600, 600))
 
     while True:
         event, values = window.read()
@@ -107,7 +112,7 @@ def main():
                 file_list = os.listdir(folder)
             except:
                 file_list = []
-
+            print(file_list)
             fnames = [
                 f
                 for f in file_list
@@ -120,7 +125,7 @@ def main():
                 n = f"{folder}/{i}"
                 # opening the CSV file
                 with open(n, mode='r')as file:
-  
+
                     # reading the CSV file
                     csvFile = csv.DictReader(file)
 
@@ -129,19 +134,24 @@ def main():
                         titles.append(f'{i.split(".")[0]}_{lines["Title"]}')
                         links.append(lines["Video Link"])
                 file.close()
-        elif event == 'Download':
-            window.refresh()
-            window["-action-"].update("Downloading Videos") 
+        if event == 'Download':
+            window["-action-"].update("Downloading Videos")
+            window["-FILE LIST-"].update(titles)
             try:
                 for j in range(len(links)):
-                    window["-FILE LIST-"].update(f"Downloading Started for Video with title {titles[j].strip()}")
+                    for i in range(len(links)):
+                        window.refresh()
+                        window["-download-"].update(
+                            f"Downloading Started for Video with title {titles[j].strip()}")
                     Download(links[j], titles[j])
+                    
             except Exception as e:
                 print(e)
                 print("An error has occurred")
                 sys.exit(1)
-                
+
     window.close()
-    
+
+
 if __name__ == '__main__':
     main()
