@@ -2,81 +2,106 @@ import csv
 import shlex
 import shutil
 import subprocess
-import sys
 from pathlib import Path
+from pytubefix import YouTube
 
-from pytube import YouTube
+# import pytubefix.request
+# import requests
 
-links = []
-titles = []
+# # --- SOCKS5 Proxy Configuration ---
+# proxies = {
+#     "http": "socks5h://5.183.70.46:1080",
+#     "https": "socks5h://5.183.70.46:1080"
+# }
 
-# folder path to find csv files
-res = [x for x in Path("CSV Files/").glob('*.csv')]
+# # --- Create a session that uses the proxy ---
+# session = requests.Session()
+# session.proxies.update(proxies)
 
-for i in res:
-    # opening the CSV file
-    with open(i, mode='r')as file:
-        # reading the CSV file
-        csvFile = csv.DictReader(file)
+# # --- Patch pytubefix to use requests instead of urllib ---
+# def patched_get(url, *args, **kwargs):
+#     resp = session.get(url, timeout=20)
+#     resp.raise_for_status()
+#     return resp.text
 
-        # displaying the contents of the CSV file
-        for lines in csvFile:
-            titles.append(f'{i.name.split(".")[0]} {lines["Title"]}')
-            links.append(lines["Video Link"])
+# pytubefix.request.get = patched_get
 
-    file.close()
+# === CONFIGURATION ===
+CSV_FOLDER = Path(
+    input("Location of CSV files (e.g., C:/Users/YourName/Downloads/): ").strip())
+VIDEOS_FOLDER = Path(
+    input("Location to save videos (e.g., C:/Users/YourName/Videos/): ").strip())
+TEMP_FOLDER = Path("temp/")
 
-# funstion to download videos from youtube
+# === SETUP DIRECTORIES ===
+VIDEOS_FOLDER.mkdir(parents=True, exist_ok=True)
+TEMP_FOLDER.mkdir(parents=True, exist_ok=True)
+
+# === COLLECT ALL LINKS AND TITLES FROM CSV FILES ===
+links, titles = [], []
+for csv_file in CSV_FOLDER.glob("*.csv"):
+    with open(csv_file, mode="r", encoding="utf-8") as file:
+        reader = csv.DictReader(file)
+        for row in reader:
+            title = f'{csv_file.stem} {row["Title"]}'.strip()
+            link = row["Video Link"].strip()
+            titles.append(title)
+            links.append(link)
+        print(f"📄 Loaded {len(links)} links from {csv_file.name}")
+
+# === DOWNLOAD FUNCTION (HIGHEST QUALITY ONLY) ===
 
 
-def Download(link, title):
-    # create a videos folder
-    Path('Videos/').mkdir(parents=True, exist_ok=True)
-    # create a temp folder
-    Path('temp/').mkdir(parents=True, exist_ok=True)
+def download_highest_quality(link, title):
+    print(f"\n🎬 Downloading highest quality: {title}")
 
-    # check if the string exist in the link
-    if "https://www.youtube.com/watch?v=" in link:
+    if "youtube.com/watch?v=" not in link and "youtu.be/" not in link:
+        print(f"⚠️ Invalid link for {title}")
+        return
 
-        print(f"Downloading Started for Video with title {title.strip()} \n")
-        # Ceate Youtube Object
-        youtubeObject = YouTube(link)
+    try:
+        yt = YouTube(link, use_oauth=False,
+                     allow_oauth_cache=True)
 
-        try:
+        # Get highest video + audio streams
+        video_stream = yt.streams.filter(adaptive=True, file_extension="mp4", only_video=True) \
+                                 .order_by("resolution").desc().first()
+        audio_stream = yt.streams.filter(
+            only_audio=True).order_by("abr").desc().first()
 
-            # Youtube maintains Separate video and audio files for high resolution videos
-            # download Video in a temp location
-            youtubeObject.streams.get_highest_resolution().download(
-                output_path="temp/", filename='video.mp4')
+        if not video_stream or not audio_stream:
+            print(f"⚠️ No high-quality streams found for: {title}")
+            return
 
-            # Download Audio in a temp location
-            youtubeObject.streams.filter(abr="160kbps", progressive=False).first(
-            ).download(output_path="temp/", filename='audio.mp3')
+        # Download temporary files
+        video_path = TEMP_FOLDER / "video.mp4"
+        audio_path = TEMP_FOLDER / "audio.mp3"
 
-        except Exception as e:
-            print(e)
-            print("An error has occurred")
-            sys.exit(1)
+        print(f"⬇️ Downloading video ({video_stream.resolution})...")
+        video_stream.download(output_path=TEMP_FOLDER, filename="video.mp4")
 
-        # Access the Audio and video file location
-        audio = "./temp/audio.mp3"
-        video = "./temp/video.mp4"
+        print(f"⬇️ Downloading audio ({audio_stream.abr})...")
+        audio_stream.download(output_path=TEMP_FOLDER, filename="audio.mp3")
 
-        # Define the final merged video Location
-        filepath = f"Videos/{title.strip().replace(' ','_')}.mp4"
-
-        # Run FFmpeg in cmd to the audio and video format. this method is used as it is the fastest way to merge the files.
-        cmd = f'ffmpeg -y -i {audio}  -r 30 -i {video}  -filter:a aresample=async=1 -c:a flac -c:v copy {filepath} -loglevel quiet -stats'
+        # Merge with ffmpeg
+        output_file = VIDEOS_FOLDER / f"{title.replace(' ', '_')}.mp4"
+        cmd = f'ffmpeg -y -i "{audio_path}" -i "{video_path}" -c:v copy -c:a aac -loglevel quiet -stats "{output_file}"'
         subprocess.check_call(shlex.split(cmd))
 
-        print(f"{title.strip()} video has been downloaded successfully \n \n")
+        print(f"✅ Saved highest quality: {output_file}")
 
-        # deleting the temp folder
-        shutil.rmtree("temp/")
+    except Exception as e:
+        print(f"❌ Error downloading {title}: {e}")
 
-    else:
-        print("Invalid URL")
+    finally:
+        # Clean up temp folder after each file
+        if TEMP_FOLDER.exists():
+            shutil.rmtree(TEMP_FOLDER)
+            TEMP_FOLDER.mkdir(parents=True, exist_ok=True)
 
 
-for j in range(len(links)):
-    Download(links[j], titles[j])
+# === MAIN EXECUTION ===
+for link, title in zip(links, titles):
+    download_highest_quality(link, title)
+
+print("\n🎉 All high-quality downloads completed!")
