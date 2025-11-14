@@ -1,90 +1,181 @@
-<h1 align="center">Welcome to Bulk Youtube Video Downloader 👋</h1>
-<p>
-  <img alt="Version" src="https://img.shields.io/badge/version-v0.1-blue.svg?cacheSeconds=2592000" />
-  <a href="https://github.com/TheForgotensoul/Bulk_Youtube_Video_Downloader/blob/main/README.md" target="_blank">
-    <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" />
+<h1 align="center">Bulk YouTube Video Downloader (BYVD) 🚀</h1>
+
+<p align="center">
+  <img alt="Version" src="https://img.shields.io/badge/version-v0.2-blue.svg">
+  <img alt="Maintenance" src="https://img.shields.io/badge/Maintained-Yes-green.svg">
+  <a href="https://github.com/TheForgotensoul/Bulk_Youtube_Video_Downloader/blob/main/LICENSE">
+    <img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-yellow.svg">
   </a>
-  <a href="https://github.com/kefranabg/readme-md-generator/graphs/commit-activity" target="_blank">
-    <img alt="Maintenance" src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" />
-  </a>
-  <a href="https://github.com/TheForgotensoul/Bulk_Youtube_Video_Downloader/blob/main/LICENSE" target="_blank">
-    <img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-yellow.svg" />
-  </a>
-  <a href="https://twitter.com/theforgotensoul" target="_blank">
-    <img alt="Twitter: theforgotensoul" src="https://img.shields.io/twitter/follow/theforgotensoul.svg?style=social" />
+  <a href="https://twitter.com/theforgotensoul">
+    <img alt="Twitter Follow" src="https://img.shields.io/twitter/follow/theforgotensoul.svg?style=social">
   </a>
 </p>
 
-> Bulk Youtube Video Downloader is a python program used to download high quality youtube video in bulk by providing the youtube video link and custom tiles in a csv file. 
+<p align="center">
+  <b>Bulk YouTube Video Downloader (BYVD)</b> is a powerful Python-based tool that downloads 
+  <b>high-quality YouTube videos in bulk</b> using CSV input.  
+  Supports both a beautiful <b>GUI Application</b> and a fast <b>CLI Mode</b>.
+</p>
 
-### 🏠 [Homepage](https://github.com/TheForgotensoul/Bulk_Youtube_Video_Downloader)
-
-### ✨ [Demo](https://github.com/TheForgotensoul/Bulk_Youtube_Video_Downloader)
-
-
-## Install
-<br>
-
-### Windows Application
 ---
-* **Step_1:** Go to releases and **Download** the latest version.
-* **Step_2:** Now **Extract** the downloaded Folder.
-* **Step_3:** Double click or Run the application named **app**.
-* **Step_4:** Browse and select the CSV File(Files) and click on download and watch the magic happening.
-* **Step_5:** Yiu can the downloaded videos in the **Videos** folder located inside the **BYVD** Folder.
-<br><br>
 
-### CLI INSTALL
+## ✨ Features
+
+✔️ Bulk download unlimited videos  
+✔️ Highest-quality video + audio merge (FFmpeg)  
+✔️ Clean GUI built using **Flet**  
+✔️ Multi-CSV support  
+✔️ Real-time progress indicators  
+✔️ CLI script for Linux & Windows  
+✔️ Sanitized filenames  
+✔️ Parallel safe UI updates  
+✔️ Automatic temporary file cleanup  
+
 ---
-For Windows: Download from the repository:
+
+## 📦 Installation
+
+You can use **either the GUI App** or the **CLI version**.
+
+---
+
+# 🖥️ **GUI Application (Windows)**
+
+### 1️⃣ Download the latest release  
+👉 https://github.com/TheForgotensoul/Bulk_Youtube_Video_Downloader/releases
+
+### 2️⃣ Extract the zip file
+
+### 3️⃣ Run  
+```
+BYVD.exe
+```
+
+### 4️⃣ Load CSV files  
+Click **Browse CSVs** → Select the folder containing one or multiple CSV files.
+
+### 5️⃣ Choose output folder  
+Select where videos should be saved.
+
+### 6️⃣ Click **Download All**  
+Enjoy watching BYVD handle everything automatically.
+
+### 📂 Output  
+Videos are saved inside your selected folder in subfolders matching CSV names.
+
+---
+
+# 🛠️ FFmpeg Requirement
+
+BYVD uses **FFmpeg** to merge high-quality video + audio.
+
+### ✔️ No Installation Needed (FFmpeg Included)
+
+You do **NOT** need to download FFmpeg manually.
+
+- The repository already includes an `ffmpeg` folder  
+- The Windows release (**BYVD.zip**) already bundles `ffmpeg.exe` together with the application  
+- The app automatically uses the included FFmpeg binary
+
+
+### Linux
 ```sh
-For Linux: git clone https://github.com/TheForgotensoul/Bulk_Youtube_Video_Downloader.git
+sudo apt install ffmpeg
+```
 
-cd to the folder in cmd(terminal) and run:
+---
+
+# 🧪 CLI Version (Windows / Linux)
+
+### Clone the repository
+```sh
+git clone https://github.com/TheForgotensoul/Bulk_Youtube_Video_Downloader.git
+cd Bulk_Youtube_Video_Downloader
+```
+
+### Install dependencies
+```sh
 pip install -r requirements.txt
 ```
 
-> Then go into your download folder(/home/toto/Desktop/Bulk_Youtube_Video_Downloader) and extract the ffmped.zip in to the same folder. 
-> The folder should look something like the below image.
+### FFmpeg for CLI (Windows)
+- You do NOT need to install FFmpeg manually.
+- The repository already includes an ffmpeg folder ffmpeg.exe is bundled inside the project
+- The CLI script automatically uses the included FFmpeg binary
 
-![Folder_lookalike](https://raw.githubusercontent.com/TheForgotensoul/Bulk_Youtube_Video_Downloader/main/ref_img/folder_look_alike.png)
-
-
-
-## Usage
-Place the CSV file in the the CSV Files folder.
-The CSV File should look like the below Image.
-
-**Do not change the header names.**
-
-![CSV_Files](https://raw.githubusercontent.com/TheForgotensoul/Bulk_Youtube_Video_Downloader/main/ref_img/CSV_file.png)
+### FFmpeg for CLI (Linux)
+#### Linux users need to install FFmpeg because .exe binaries don’t work on Linux:
 ```sh
-cd Bulk_Youtube_Video_Downloader  (Ex: cd /home/toto/Desktop/Bulk_Youtube_Video_Downloader )
+sudo apt install ffmpeg
+```
+---
 
-# Then run:
+# 📄 CSV Format
+
+Your CSV **must contain the following exact headers**:
+
+```
+Title, Video Link
+```
+
+Example:
+
+| Title               | Video Link                 |
+|--------------------|-----------------------------|
+| My Video Title 1   | https://youtube.com/...     |
+| My Video Title 2   | https://youtu.be/...        |
+
+📌 **Do not change header names**  
+📌 BYVD supports multiple CSV files in a folder  
+📌 Subfolders are created based on CSV filenames  
+
+---
+
+# ▶️ Running CLI Downloader
+
+```sh
 python CLI.py
 ```
-The videos will be populated in ***Videos*** Folder in the same location.
 
-## Author
+### It will ask:
 
-👤 **theforgotensoul**
+```
+Location of CSV files:
+Location to save videos:
+```
 
-* Twitter: [@theforgotensoul](https://twitter.com/theforgotensoul)
-* GitHub: [@theforgotensoul](https://github.com/theforgotensoul)
+Then it will automatically:
 
-## 🤝 Contributing
+- Read all CSV files  
+- Download highest-quality video & audio  
+- Merge them using FFmpeg  
+- Save inside the selected folder  
+- Clean temp files  
 
-Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/TheForgotensoul/Bulk_Youtube_Video_Downloader/issues). You can also take a look at the [contributing guide](https://github.com/kefranabg/readme-md-generator/blob/master/CONTRIBUTING.md).
+---
 
-## Show your support
+# 👤 Author
 
-Give a ⭐️ if this project helped you!
+**theforgotensoul**
 
-## 📝 License
+- Twitter: https://twitter.com/theforgotensoul  
+- GitHub: https://github.com/theforgotensoul  
 
-Copyright © 2022 [theforgotensoul](https://github.com/theforgotensoul).<br />
-This project is [MIT](https://github.com/TheForgotensoul/Bulk_Youtube_Video_Downloader/blob/main/LICENSE) licensed.
+---
 
-***
-_This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_
+# 🤝 Contributing
+
+Contributions, issues and feature requests are welcome!  
+👉 https://github.com/TheForgotensoul/Bulk_Youtube_Video_Downloader/issues
+
+---
+
+# ⭐ Support
+
+If this project helped you, please **give it a star!**
+
+---
+
+# 📝 License
+
+This project is licensed under the **MIT License**.
